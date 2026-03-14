@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+  
+  --color-accent: var(--color-accent-val);
+  --color-accent-fg: var(--color-accent-fg-val);
+  --color-surface: var(--color-surface-val);
+  --color-surface2: var(--color-surface2-val);
+  --color-bg: var(--color-bg-val);
+  --color-text: var(--color-text-val);
+  --color-text-muted: var(--color-text-muted-val);
+  --color-border: var(--color-border-val);
+  --color-border-hover: var(--color-border-hover-val);
+  --color-hover: var(--color-hover-val);
+  
+  --color-black: var(--color-black-val);
+  --color-white: var(--color-white-val);
+  
+  --color-gray-200: var(--color-gray-200-val);
+  --color-gray-300: var(--color-gray-300-val);
+  --color-gray-400: var(--color-gray-400-val);
+  --color-gray-500: var(--color-gray-500-val);
+}
+
+:root {
+  /* Dark Mode (Default) */
+  --color-accent-val: #D4F870;
+  --color-accent-fg-val: #000000;
+  --color-surface-val: #111111;
+  --color-surface2-val: #161616;
+  --color-bg-val: #050505;
+  --color-text-val: #ffffff;
+  --color-text-muted-val: #9ca3af; /* gray-400 */
+  --color-border-val: rgba(255, 255, 255, 0.05);
+  --color-border-hover-val: rgba(255, 255, 255, 0.1);
+  --color-hover-val: rgba(255, 255, 255, 0.1);
+  
+  --color-black-val: #000000;
+  --color-white-val: #ffffff;
+  
+  --color-gray-200-val: #e5e7eb;
+  --color-gray-300-val: #d1d5db;
+  --color-gray-400-val: #9ca3af;
+  --color-gray-500-val: #6b7280;
+}
+
+.light-mode {
+  /* Light Mode */
+  --color-accent-val: #84cc16; /* lime-500 */
+  --color-accent-fg-val: #ffffff;
+  --color-surface-val: #ffffff;
+  --color-surface2-val: #f8fafc; /* slate-50 */
+  --color-bg-val: #f1f5f9; /* slate-100 */
+  --color-text-val: #0f172a; /* slate-900 */
+  --color-text-muted-val: #475569; /* slate-600 */
+  --color-border-val: rgba(0, 0, 0, 0.05);
+  --color-border-hover-val: rgba(0, 0, 0, 0.1);
+  --color-hover-val: rgba(0, 0, 0, 0.1);
+  
+  --color-black-val: #ffffff;
+  --color-white-val: #000000;
+  
+  --color-gray-200-val: #334155; /* slate-700 */
+  --color-gray-300-val: #475569; /* slate-600 */
+  --color-gray-400-val: #64748b; /* slate-500 */
+  --color-gray-500-val: #94a3b8; /* slate-400 */
+}
+
+body {
+  background-color: var(--color-bg-val);
+  color: var(--color-text-val);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
