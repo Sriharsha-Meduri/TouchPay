@@ -580,7 +580,7 @@ export default function App() {
                 onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
                 className={`px-8 py-4 rounded-lg font-medium transition-all border ${
                   isLightMode
-                    ? 'bg-surface2 border-black/10 text-black hover:bg-black/5'
+                    ? 'bg-surface border-border text-text hover:bg-hover shadow-sm'
                     : 'bg-surface border-white/10 text-white hover:bg-white/10'
                 }`}
               >
