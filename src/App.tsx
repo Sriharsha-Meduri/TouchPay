@@ -326,12 +326,12 @@ export default function App() {
 
   const navItems = [
     { label: 'Overview', href: '#home' },
-    { label: 'About', href: '#about' },
     { label: 'Features', href: '#features' },
     { label: 'Security', href: '#security' },
     { label: 'Pricing', href: '#pricing' },
     { label: 'Reviews', href: '#testimonials' },
     { label: 'FAQ', href: '#faq' },
+    { label: 'About', href: '#about' },
   ];
 
   const teamMembers = [
@@ -1195,7 +1195,7 @@ export default function App() {
           >
             <motion.div variants={fadeUp} className="text-accent text-sm font-medium mb-4 tracking-wider uppercase">Get Started Today</motion.div>
             <motion.h2 variants={fadeUp} className="text-4xl md:text-6xl font-medium text-white leading-tight mb-6">
-              Join the 34K+ users who <br />
+              Join the users who <br />
               pay <span className="font-serif italic text-accent">With a Touch</span>
             </motion.h2>
             <motion.p variants={fadeUp} className="text-gray-400 max-w-2xl mx-auto mb-16">
