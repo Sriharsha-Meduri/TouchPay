@@ -77,3 +77,122 @@ body {
   color: var(--color-text-val);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+@media (max-width: 1023px) {
+  .touchpay-app section {
+    padding-top: 4.5rem;
+    padding-bottom: 4.5rem;
+  }
+
+  .touchpay-app .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .touchpay-app #home {
+    padding-top: 7rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .touchpay-app #home > .absolute,
+  .touchpay-app #cta > .absolute,
+  .touchpay-app #testimonials .container > .absolute,
+  .touchpay-app #testimonials .max-w-3xl > .absolute {
+    display: none;
+  }
+
+  .touchpay-app .hero-title {
+    font-size: clamp(2.1rem, 9vw, 3rem);
+    line-height: 1.1;
+  }
+
+  .touchpay-app .hero-subtitle {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .touchpay-app .hero-actions {
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  .touchpay-app .hero-actions > button {
+    width: 100%;
+  }
+
+  .touchpay-app .hero-mockup {
+    margin-top: 2.5rem;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .touchpay-app #testimonials h2 {
+    margin-bottom: 2.75rem;
+  }
+
+  .touchpay-app #testimonials p.text-2xl {
+    font-size: 1.125rem;
+    line-height: 1.65;
+  }
+
+  .touchpay-app .newsletter-form {
+    flex-direction: column;
+  }
+
+  .touchpay-app .newsletter-form > * {
+    width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .touchpay-app .app-nav-container {
+    height: 4.5rem;
+  }
+
+  .touchpay-app .app-nav-container > a {
+    font-size: 1.25rem;
+  }
+
+  .touchpay-app .theme-toggle {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .touchpay-app .nav-cta {
+    padding: 0.5rem 0.7rem;
+    font-size: 0.75rem;
+    line-height: 1.1;
+  }
+
+  .touchpay-app #home .inline-flex {
+    margin-bottom: 1.25rem;
+  }
+
+  .touchpay-app #faq .text-lg {
+    font-size: 1rem;
+  }
+
+  .touchpay-app #about .w-28.h-28 {
+    width: 5.5rem;
+    height: 5.5rem;
+  }
+
+  .touchpay-app footer h1 {
+    font-size: 20vw;
+  }
+}
+
+@media (max-width: 420px) {
+  .touchpay-app .app-nav-container > a {
+    font-size: 1.1rem;
+  }
+
+  .touchpay-app .nav-cta {
+    padding: 0.45rem 0.6rem;
+    font-size: 0.68rem;
+  }
+
+  .touchpay-app .hero-title {
+    font-size: 1.9rem;
+  }
+}

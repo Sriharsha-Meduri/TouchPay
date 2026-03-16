@@ -448,7 +448,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen font-sans bg-bg overflow-x-hidden">
+    <div className="touchpay-app min-h-screen font-sans bg-bg overflow-x-hidden">
       {/* Navbar */}
       <motion.nav 
         initial={{ y: -100 }}
@@ -456,7 +456,7 @@ export default function App() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="fixed top-0 left-0 right-0 z-50 bg-bg/80 backdrop-blur-md border-b border-white/5"
       >
-        <div className="container mx-auto px-6 h-20 flex items-center justify-between">
+        <div className="app-nav-container container mx-auto px-6 h-20 flex items-center justify-between">
           <a href="#home" className="text-2xl font-bold text-white flex items-center gap-2 group cursor-pointer">
             <motion.div whileHover={{ rotate: 180 }} transition={{ duration: 0.3 }}>
               <Fingerprint className="text-accent" />
@@ -478,7 +478,7 @@ export default function App() {
               whileHover={{ scale: 1.05, backgroundColor: 'rgba(255,255,255,0.1)' }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsLightMode((prev) => !prev)}
-              className="w-10 h-10 rounded-lg border border-white/10 text-white flex items-center justify-center transition-colors"
+              className="theme-toggle w-10 h-10 rounded-lg border border-white/10 text-white flex items-center justify-center transition-colors"
               aria-label={isLightMode ? 'Switch to dark mode' : 'Switch to light mode'}
             >
               {isLightMode ? <Moon size={16} /> : <Sun size={16} />}
@@ -487,7 +487,7 @@ export default function App() {
               whileHover={{ scale: 1.05, backgroundColor: 'rgba(255,255,255,0.1)' }}
               whileTap={{ scale: 0.95 }}
               onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-5 py-2.5 rounded-lg border border-white/10 text-white text-sm font-medium transition-colors"
+              className="nav-cta px-5 py-2.5 rounded-lg border border-white/10 text-white text-sm font-medium transition-colors"
             >
               Get Started
             </motion.button>
@@ -556,16 +556,16 @@ export default function App() {
               <span className="text-sm text-gray-300">Launching a revolution </span>
             </motion.div>
             
-            <motion.h1 variants={fadeUp} className="text-5xl md:text-7xl font-medium tracking-tight mb-6 text-white">
+            <motion.h1 variants={fadeUp} className="hero-title text-5xl md:text-7xl font-medium tracking-tight mb-6 text-white">
               Pay with your <br />
               <span className="font-serif italic text-accent inline-block">Fingerprint</span>
             </motion.h1>
             
-            <motion.p variants={fadeUp} className="text-lg text-gray-400 max-w-2xl mx-auto mb-10">
+            <motion.p variants={fadeUp} className="hero-subtitle text-lg text-gray-400 max-w-2xl mx-auto mb-10">
               A mobile payment app that lets you pay merchants using only your fingerprint. No phone number, no OTP, no internet needed.
             </motion.p>
             
-            <motion.div variants={fadeUp} className="flex flex-wrap items-center justify-center gap-4">
+            <motion.div variants={fadeUp} className="hero-actions flex flex-wrap items-center justify-center gap-4">
               <motion.button 
                 whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(212,248,112,0.4)" }}
                 whileTap={{ scale: 0.95 }}
@@ -590,7 +590,7 @@ export default function App() {
           </motion.div>
         </div>
         
-        <div className="mt-20 max-w-5xl mx-auto px-6 relative z-10">
+        <div className="hero-mockup mt-20 max-w-5xl mx-auto px-6 relative z-10">
           <DashboardMockup />
         </div>
       </section>
@@ -1218,7 +1218,7 @@ export default function App() {
               <p className="text-gray-400 mb-6 max-w-sm">
                 Join our newsletter for tips, updates, and project highly on the good stuff.
               </p>
-              <div className="flex gap-2">
+              <div className="newsletter-form flex gap-2">
                 <input 
                   type="email" 
                   placeholder="Enter your email..." 
