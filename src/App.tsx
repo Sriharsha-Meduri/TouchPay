@@ -355,7 +355,7 @@ export default function App() {
       name: 'Sriharsha Meduri',
       role: 'Co founder & CTO',
       photo: '/team/sriharsha-meduri.jpeg',
-      photoX: 75,
+      photoX: 77,
       photoY: 110,
       photoZoom: 3.5,
       noCrop: true,
