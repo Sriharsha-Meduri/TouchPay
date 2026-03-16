@@ -344,8 +344,8 @@ export default function App() {
       photoZoom: 1.3,
     },
     {
-      name: 'Ranjit Singh',
-      role: 'Co founder & COO',
+      name: 'Ranjith Singh',
+      role: 'Co-founder & COO',
       photo: '/team/ranjit-singh.jpeg',
       photoX: 10,
       photoY: 52,
@@ -353,7 +353,7 @@ export default function App() {
     },
     {
       name: 'Sriharsha Meduri',
-      role: 'Co founder & CTO',
+      role: 'Co-founder & CTO',
       photo: '/team/sriharsha-meduri.jpeg',
       photoX: 77,
       photoY: 110,
