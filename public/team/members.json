@@ -1,0 +1,32 @@
+[ 
+  {
+    "name": "Santosh Srighakollapu",
+    "role": "Lead Product Strategist",
+    "photo": "srighakollapu-santosh.jpeg"
+  },
+  {
+    "name": "Ranjit Singh",
+    "role": "Backend Systems Engineer",
+    "photo": "ranjit-singh.jpeg"
+  },
+  {
+    "name": "Sriharsha Meduri",
+    "role": "Mobile Experience Developer",
+    "photo": "sriharsha-meduri.jpeg"
+  },
+  {
+    "name": "Ratna Sai Sree",
+    "role": "UX Research & Design",
+    "photo": "ratna-sai-sree.jpeg"
+  },
+  {
+    "name": "Shaik Sameena",
+    "role": "Quality & Release Coordinator",
+    "photo": "shaik-sameena.jpeg"
+  },
+  {
+    "name": "Sree Vardhan",
+    "role": "Frontend Performance Engineer",
+    "photo": "sree-vardhan.jpeg"
+  }
+]

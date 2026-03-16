@@ -3,12 +3,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   WifiOff, Smartphone, ShieldCheck, Lock, 
   ChevronDown, ChevronUp, ArrowRight, CheckCircle2,
-  Fingerprint, Zap, History, Shield
+  Fingerprint, Zap, History, Shield, Sun, Moon
 } from 'lucide-react';
 
 // Animation Variants
@@ -33,14 +33,14 @@ const DashboardMockup = () => (
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-    className="w-full rounded-2xl border border-white/10 bg-[#0a0a0a] overflow-hidden shadow-2xl shadow-accent/5 relative group"
+    className="w-full rounded-2xl border border-white/10 bg-bg overflow-hidden shadow-2xl shadow-accent/5 relative group"
   >
     {/* Subtle animated glow behind mockup */}
     <div className="absolute -inset-1 bg-gradient-to-r from-accent/0 via-accent/10 to-accent/0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 blur-xl" />
     
-    <div className="relative bg-[#0a0a0a]">
+    <div className="relative bg-bg">
       {/* Top bar */}
-      <div className="h-12 border-b border-white/10 flex items-center px-4 gap-2 bg-[#111]">
+      <div className="h-12 border-b border-white/10 flex items-center px-4 gap-2 bg-surface">
         <div className="flex gap-1.5">
           <div className="w-3 h-3 rounded-full bg-red-500/50 border border-red-500/50" />
           <div className="w-3 h-3 rounded-full bg-yellow-500/50 border border-yellow-500/50" />
@@ -94,10 +94,20 @@ const DashboardMockup = () => (
               </div>
             </div>
             <div className="flex gap-3">
-              <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="px-4 py-2 bg-white/5 hover:bg-white/10 text-white rounded-lg text-sm font-medium transition-colors">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' })}
+                className="px-4 py-2 bg-white/5 hover:bg-white/10 text-white rounded-lg text-sm font-medium transition-colors"
+              >
                 Withdraw
               </motion.button>
-              <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="px-4 py-2 bg-accent text-black hover:bg-accent/90 rounded-lg text-sm font-medium transition-colors shadow-[0_0_15px_rgba(212,248,112,0.3)]">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+                className="px-4 py-2 bg-accent text-black hover:bg-accent/90 rounded-lg text-sm font-medium transition-colors shadow-[0_0_15px_rgba(212,248,112,0.3)]"
+              >
                 Add Funds
               </motion.button>
             </div>
@@ -311,45 +321,182 @@ const FAQItem = ({ question, answer, isOpen, onClick }: any) => (
 export default function App() {
   const [openAccordion, setOpenAccordion] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [isLightMode, setIsLightMode] = useState(false);
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
+
+  const navItems = [
+    { label: 'Overview', href: '#home' },
+    { label: 'About', href: '#about' },
+    { label: 'Features', href: '#features' },
+    { label: 'Security', href: '#security' },
+    { label: 'Pricing', href: '#pricing' },
+    { label: 'Reviews', href: '#testimonials' },
+    { label: 'FAQ', href: '#faq' },
+  ];
+
+  const teamMembers = [
+    {
+      name: 'Santosh Srighakollapu',
+      role: 'Founder & CEO',
+      photo: '/team/srighakollapu-santosh.jpeg',
+      photoX: 60,
+      photoY: 52,
+      photoZoom: 1.3,
+    },
+    {
+      name: 'Ranjit Singh',
+      role: 'Co founder & COO',
+      photo: '/team/ranjit-singh.jpeg',
+      photoX: 10,
+      photoY: 52,
+      photoZoom: 2,
+    },
+    {
+      name: 'Sriharsha Meduri',
+      role: 'Co founder & CTO',
+      photo: '/team/sriharsha-meduri.jpeg',
+      photoX: 75,
+      photoY: 110,
+      photoZoom: 3.5,
+      noCrop: true,
+    },
+    {
+      name: 'Ratna Sai Sree',
+      role: 'UI UX designer',
+      photo: '/team/ratna-sai-sree.jpeg',
+      photoX: 50,
+      photoY: 52,
+      photoZoom: 1.2,
+    },
+    {
+      name: 'Shaik Sameena',
+      role: 'Research & design',
+      photo: '/team/shaik-sameena.jpeg',
+      photoX: 44,
+      photoY: 42,
+      photoZoom: 1.2,
+    },
+    {
+      name: 'Sree Vardhan',
+      role: 'Founding Engineer',
+      photo: '/team/sree-vardhan.jpeg',
+      photoX: 50,
+      photoY: 32,
+      photoZoom: 1.6,
+    },
+  ];
+
+  const testimonials = [
+    {
+      quote:
+        "I've tried nearly every UPI app, but TouchPay is the first one that feels truly designed to streamline everyday payments. No more waiting for OTPs or scanning QR codes.",
+      name: 'Rahul Sharma',
+      role: 'Daily Commuter',
+      avatar: 'https://picsum.photos/seed/mainuser/200/200',
+    },
+    {
+      quote:
+        'My kirana customers complete payments in seconds even when network drops. The offline queue has reduced failed checkouts during rush hours.',
+      name: 'Ananya Patel',
+      role: 'Store Owner',
+      avatar: 'https://picsum.photos/seed/mainuser2/200/200',
+    },
+    {
+      quote:
+        'Fingerprint + PIN fallback gives exactly the balance I wanted: speed for regular rides and safety when my phone is shared at home.',
+      name: 'Imran Khan',
+      role: 'Auto Driver',
+      avatar: 'https://picsum.photos/seed/mainuser3/200/200',
+    },
+    {
+      quote:
+        'The privacy-first design is what sold me. I can pay quickly without exposing phone number details to every merchant interaction.',
+      name: 'Sneha Iyer',
+      role: 'Graduate Student',
+      avatar: 'https://picsum.photos/seed/mainuser4/200/200',
+    },
+    {
+      quote:
+        'TouchPay made micro-payments on campus frictionless. Students now finish transactions faster than cash and with fewer disputes.',
+      name: 'Arjun Mehta',
+      role: 'Campus Admin',
+      avatar: 'https://picsum.photos/seed/mainuser5/200/200',
+    },
+  ];
+
+  const faqs = [
+    { q: 'Does the merchant need an app?', a: 'No, the merchant needs no app, no device, and no QR code. They just tell you the amount verbally or write it down.' },
+    { q: "What if I don't have internet?", a: 'TouchPay works offline with strict limits up to ₹500 per transaction and a total of ₹2,000 pending. It automatically syncs when you are back online.' },
+    { q: 'Is my fingerprint safe?', a: "Yes, your fingerprint never leaves your phone's secure hardware. The server only verifies a cryptographic signature, not the fingerprint itself." },
+    { q: 'What if the fingerprint fails?', a: 'After 3 failed biometric attempts, the app will ask for your 4-digit PIN. After 3 failed PIN attempts, the account locks for your security.' },
+    { q: 'Can I track pending offline payments?', a: 'Yes. The app clearly marks queued, synced, and failed transactions so you always know what still needs internet confirmation.' },
+    { q: 'How are failed payments handled?', a: 'If sync fails due to low balance, duplicate request, or policy checks, the app marks it failed and lets you retry safely once resolved.' },
+    { q: 'Can I use TouchPay on multiple phones?', a: 'For security, your account is bound to your enrolled device and secure hardware. Device migration requires secure re-enrollment.' },
+  ];
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('light-mode', isLightMode);
+    document.body.classList.toggle('light-mode', isLightMode);
+  }, [isLightMode]);
+
+  const handlePrevTestimonial = () => {
+    setActiveTestimonial((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
+  };
+
+  const handleNextTestimonial = () => {
+    setActiveTestimonial((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
+  };
 
   return (
-    <div className="min-h-screen font-sans bg-[#050505] overflow-x-hidden">
+    <div className="min-h-screen font-sans bg-bg overflow-x-hidden">
       {/* Navbar */}
       <motion.nav 
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="fixed top-0 left-0 right-0 z-50 bg-[#050505]/80 backdrop-blur-md border-b border-white/5"
+        className="fixed top-0 left-0 right-0 z-50 bg-bg/80 backdrop-blur-md border-b border-white/5"
       >
         <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="text-2xl font-bold text-white flex items-center gap-2 group cursor-pointer">
+          <a href="#home" className="text-2xl font-bold text-white flex items-center gap-2 group cursor-pointer">
             <motion.div whileHover={{ rotate: 180 }} transition={{ duration: 0.3 }}>
               <Fingerprint className="text-accent" />
             </motion.div>
             TouchPay
-          </div>
+          </a>
           
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
-            {['Home', 'About Us', 'Blog', 'Pages', 'Pricing'].map((item, i) => (
-              <a key={i} href="#" className="hover:text-accent transition-colors relative group">
-                {item}
+            {navItems.map((item) => (
+              <a key={item.label} href={item.href} className="hover:text-accent transition-colors relative group">
+                {item.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
           </div>
-          
-          <motion.button 
-            whileHover={{ scale: 1.05, backgroundColor: 'rgba(255,255,255,0.1)' }}
-            whileTap={{ scale: 0.95 }}
-            className="px-5 py-2.5 rounded-lg border border-white/10 text-white text-sm font-medium transition-colors"
-          >
-            Get Started
-          </motion.button>
+
+          <div className="flex items-center gap-3">
+            <motion.button
+              whileHover={{ scale: 1.05, backgroundColor: 'rgba(255,255,255,0.1)' }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setIsLightMode((prev) => !prev)}
+              className="w-10 h-10 rounded-lg border border-white/10 text-white flex items-center justify-center transition-colors"
+              aria-label={isLightMode ? 'Switch to dark mode' : 'Switch to light mode'}
+            >
+              {isLightMode ? <Moon size={16} /> : <Sun size={16} />}
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05, backgroundColor: 'rgba(255,255,255,0.1)' }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+              className="px-5 py-2.5 rounded-lg border border-white/10 text-white text-sm font-medium transition-colors"
+            >
+              Get Started
+            </motion.button>
+          </div>
         </div>
       </motion.nav>
 
       {/* Hero */}
-      <section className="relative pt-40 pb-20 overflow-hidden">
+      <section id="home" className="relative pt-40 pb-20 overflow-hidden">
         {/* Background Glow */}
         <div 
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent/20 rounded-full blur-[120px] pointer-events-none" 
@@ -411,15 +558,7 @@ export default function App() {
             
             <motion.h1 variants={fadeUp} className="text-5xl md:text-7xl font-medium tracking-tight mb-6 text-white">
               Pay with your <br />
-              <span className="font-serif italic text-accent relative inline-block">
-                Fingerprint
-                <motion.span 
-                  initial={{ width: 0 }}
-                  animate={{ width: '100%' }}
-                  transition={{ delay: 1, duration: 0.8 }}
-                  className="absolute bottom-2 left-0 h-1 bg-accent/30 rounded-full"
-                />
-              </span>
+              <span className="font-serif italic text-accent inline-block">Fingerprint</span>
             </motion.h1>
             
             <motion.p variants={fadeUp} className="text-lg text-gray-400 max-w-2xl mx-auto mb-10">
@@ -430,14 +569,20 @@ export default function App() {
               <motion.button 
                 whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(212,248,112,0.4)" }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
                 className="px-8 py-4 rounded-lg bg-accent text-black font-medium transition-all"
               >
                 Get Started
               </motion.button>
               <motion.button 
-                whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 rounded-lg bg-surface border border-white/10 text-white font-medium transition-all"
+                onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
+                className={`px-8 py-4 rounded-lg font-medium transition-all border ${
+                  isLightMode
+                    ? 'bg-surface2 border-black/10 text-black hover:bg-black/5'
+                    : 'bg-surface border-white/10 text-white hover:bg-white/10'
+                }`}
               >
                 Learn more
               </motion.button>
@@ -451,7 +596,7 @@ export default function App() {
       </section>
 
       {/* Features */}
-      <section className="py-24 relative">
+      <section id="features" className="py-24 relative">
         <div className="container mx-auto px-6">
           <motion.div 
             initial="hidden"
@@ -737,7 +882,7 @@ export default function App() {
       </section>
 
       {/* Split */}
-      <section className="py-24 relative">
+      <section id="security" className="py-24 relative">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div 
@@ -807,7 +952,7 @@ export default function App() {
       </section>
 
       {/* Pricing */}
-      <section className="py-24 relative">
+      <section id="pricing" className="py-24 relative">
         <div className="container mx-auto px-6">
           <motion.div 
             initial="hidden"
@@ -871,7 +1016,7 @@ export default function App() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-24 overflow-hidden relative">
+      <section id="testimonials" className="py-24 overflow-hidden relative">
         <div className="container mx-auto px-6 text-center relative">
           <motion.div 
             animate={{ scale: [1, 1.2, 1], opacity: [0.02, 0.05, 0.02] }}
@@ -903,24 +1048,34 @@ export default function App() {
                 <img src="https://picsum.photos/seed/user3/100/100" alt="User" className="w-full h-full object-cover opacity-80" />
               </motion.div>
               
-              <motion.div variants={fadeUp} className="w-20 h-20 mx-auto rounded-full bg-surface border-2 border-accent overflow-hidden mb-8 shadow-[0_0_20px_rgba(212,248,112,0.3)]">
-                <img src="https://picsum.photos/seed/mainuser/200/200" alt="Main User" className="w-full h-full object-cover" />
-              </motion.div>
-              
-              <motion.p variants={fadeUp} className="text-2xl md:text-3xl text-white font-medium leading-relaxed mb-8">
-                "I've tried nearly every UPI app, but TouchPay is the first one that feels truly designed to streamline everyday payments. No more waiting for OTPs or scanning QR codes."
-              </motion.p>
-              
-              <motion.div variants={fadeUp}>
-                <div className="text-accent font-medium text-lg">Rahul Sharma</div>
-                <div className="text-gray-400 text-sm">Daily Commuter</div>
-              </motion.div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={testimonials[activeTestimonial].name}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -16 }}
+                  transition={{ duration: 0.35, ease: 'easeOut' }}
+                >
+                  <div className="w-20 h-20 mx-auto rounded-full bg-surface border-2 border-accent overflow-hidden mb-8 shadow-[0_0_20px_rgba(212,248,112,0.3)]">
+                    <img src={testimonials[activeTestimonial].avatar} alt={testimonials[activeTestimonial].name} className="w-full h-full object-cover" />
+                  </div>
+
+                  <p className="text-2xl md:text-3xl text-white font-medium leading-relaxed mb-8">
+                    “{testimonials[activeTestimonial].quote}”
+                  </p>
+
+                  <div>
+                    <div className="text-accent font-medium text-lg">{testimonials[activeTestimonial].name}</div>
+                    <div className="text-gray-400 text-sm">{testimonials[activeTestimonial].role}</div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
               
               <motion.div variants={fadeUp} className="flex items-center justify-center gap-4 mt-8">
-                <motion.button whileHover={{ scale: 1.1, backgroundColor: 'rgba(255,255,255,0.1)' }} whileTap={{ scale: 0.9 }} className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white transition-colors">
+                <motion.button whileHover={{ scale: 1.1, backgroundColor: 'rgba(255,255,255,0.1)' }} whileTap={{ scale: 0.9 }} onClick={handlePrevTestimonial} className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white transition-colors" aria-label="Previous testimonial">
                   <ArrowRight className="rotate-180" size={18} />
                 </motion.button>
-                <motion.button whileHover={{ scale: 1.1, backgroundColor: 'rgba(255,255,255,0.1)' }} whileTap={{ scale: 0.9 }} className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white transition-colors">
+                <motion.button whileHover={{ scale: 1.1, backgroundColor: 'rgba(255,255,255,0.1)' }} whileTap={{ scale: 0.9 }} onClick={handleNextTestimonial} className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white transition-colors" aria-label="Next testimonial">
                   <ArrowRight size={18} />
                 </motion.button>
               </motion.div>
@@ -930,7 +1085,7 @@ export default function App() {
       </section>
 
       {/* FAQ */}
-      <section className="py-24 relative">
+      <section id="faq" className="py-24 relative">
         <div className="container mx-auto px-6 max-w-3xl">
           <motion.div 
             initial="hidden"
@@ -955,15 +1110,10 @@ export default function App() {
             variants={staggerContainer}
             className="space-y-2"
           >
-            {[
-              { q: "Does the merchant need an app?", a: "No, the merchant needs no app, no device, and no QR code. They just tell you the amount verbally or write it down." },
-              { q: "What if I don't have internet?", a: "TouchPay works offline with strict limits up to ₹500 per transaction and a total of ₹2,000 pending. It automatically syncs when you are back online." },
-              { q: "Is my fingerprint safe?", a: "Yes, your fingerprint never leaves your phone's secure hardware. The server only verifies a cryptographic signature, not the fingerprint itself." },
-              { q: "What if the fingerprint fails?", a: "After 3 failed biometric attempts, the app will ask for your 4-digit PIN. After 3 failed PIN attempts, the account locks for your security." }
-            ].map((faq, i) => (
+            {faqs.map((faq, i) => (
               <motion.div variants={fadeUp} key={i}>
                 <FAQItem 
-                  question={`0${i+1} ${faq.q}`}
+                  question={`${String(i + 1).padStart(2, '0')} ${faq.q}`}
                   answer={faq.a}
                   isOpen={openFaq === i}
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
@@ -974,8 +1124,62 @@ export default function App() {
         </div>
       </section>
 
+      {/* About */}
+      <section id="about" className="py-24 relative">
+        <div className="container mx-auto px-6">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
+            className="text-center mb-16"
+          >
+            <motion.div variants={fadeUp} className="text-accent text-sm font-medium mb-4 tracking-wider uppercase">About Us</motion.div>
+            <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-medium text-white leading-tight mb-6">
+              Built by a focused <span className="font-serif italic text-accent">TouchPay Team</span>
+            </motion.h2>
+            <motion.p variants={fadeUp} className="text-gray-400 max-w-2xl mx-auto">
+              The people behind TouchPay who designed, built, and shipped this project.
+            </motion.p>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {teamMembers.map((member) => (
+              <motion.div
+                key={member.name}
+                variants={fadeUp}
+                whileHover={{ y: -6 }}
+                className="bg-surface border border-white/10 rounded-2xl p-6 text-center hover:border-accent/30 transition-colors"
+              >
+                <div className="w-28 h-28 mx-auto rounded-full overflow-hidden border-2 border-accent/60 mb-5 shadow-[0_0_20px_rgba(212,248,112,0.15)]">
+                  <img
+                    src={member.photo}
+                    alt={member.name}
+                    className={`w-full h-full ${member.noCrop ? 'object-contain' : 'object-cover'}`}
+                    style={{
+                      backgroundColor: member.noCrop ? 'var(--color-surface2-val)' : 'transparent',
+                      objectPosition: member.noCrop ? 'center' : 'center',
+                      transform: `translate(${member.photoX - 50}%, ${member.photoY - 50}%) scale(${member.photoZoom})`,
+                      transformOrigin: 'center center',
+                    }}
+                  />
+                </div>
+                <h3 className="text-xl font-medium text-white mb-1">{member.name}</h3>
+                <p className="text-gray-400 text-sm">{member.role}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
       {/* CTA */}
-      <section className="py-24 relative overflow-hidden">
+      <section id="cta" className="py-24 relative overflow-hidden">
         <motion.div 
           animate={{ opacity: [0.05, 0.15, 0.05], scale: [1, 1.1, 1] }}
           transition={{ duration: 6, repeat: Infinity }}
@@ -1006,7 +1210,7 @@ export default function App() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-[#050505] pt-24 pb-12 border-t border-white/5">
+      <footer className="bg-bg pt-24 pb-12 border-t border-white/5">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-24">
             <div className="md:col-span-5">
@@ -1033,34 +1237,34 @@ export default function App() {
             <div className="md:col-span-2 md:col-start-7">
               <h4 className="text-white font-medium mb-6">Platform</h4>
               <ul className="space-y-4 text-gray-400 text-sm">
-                <li><a href="#" className="hover:text-accent transition-colors">Analytics</a></li>
-                <li><a href="#" className="hover:text-accent transition-colors">Planning</a></li>
-                <li><a href="#" className="hover:text-accent transition-colors">Collaboration</a></li>
-                <li><a href="#" className="hover:text-accent transition-colors">Data management</a></li>
-                <li><a href="#" className="hover:text-accent transition-colors">Integrations</a></li>
-                <li><a href="#" className="hover:text-accent transition-colors">Security</a></li>
+                <li><a href="#features" className="hover:text-accent transition-colors">Analytics</a></li>
+                <li><a href="#pricing" className="hover:text-accent transition-colors">Planning</a></li>
+                <li><a href="#testimonials" className="hover:text-accent transition-colors">Collaboration</a></li>
+                <li><a href="#features" className="hover:text-accent transition-colors">Data management</a></li>
+                <li><a href="#security" className="hover:text-accent transition-colors">Integrations</a></li>
+                <li><a href="#security" className="hover:text-accent transition-colors">Security</a></li>
               </ul>
             </div>
             
             <div className="md:col-span-2">
               <h4 className="text-white font-medium mb-6">Resources</h4>
               <ul className="space-y-4 text-gray-400 text-sm">
-                <li><a href="#" className="hover:text-accent transition-colors">Customers</a></li>
-                <li><a href="#" className="hover:text-accent transition-colors">Strategic finance</a></li>
-                <li><a href="#" className="hover:text-accent transition-colors">Ebook & guides</a></li>
-                <li><a href="#" className="hover:text-accent transition-colors">Webinars & events</a></li>
-                <li><a href="#" className="hover:text-accent transition-colors">Podcast & video</a></li>
+                <li><a href="#testimonials" className="hover:text-accent transition-colors">Customers</a></li>
+                <li><a href="#pricing" className="hover:text-accent transition-colors">Strategic finance</a></li>
+                <li><a href="#faq" className="hover:text-accent transition-colors">Ebook & guides</a></li>
+                <li><a href="#faq" className="hover:text-accent transition-colors">Webinars & events</a></li>
+                <li><a href="#home" className="hover:text-accent transition-colors">Podcast & video</a></li>
               </ul>
             </div>
             
             <div className="md:col-span-2">
               <h4 className="text-white font-medium mb-6">Solutions</h4>
               <ul className="space-y-4 text-gray-400 text-sm">
-                <li><a href="#" className="hover:text-accent transition-colors">Financial</a></li>
-                <li><a href="#" className="hover:text-accent transition-colors">Investors & CEOs</a></li>
-                <li><a href="#" className="hover:text-accent transition-colors">Revenue operation</a></li>
-                <li><a href="#" className="hover:text-accent transition-colors">Sales & marketing</a></li>
-                <li><a href="#" className="hover:text-accent transition-colors">Human resources</a></li>
+                <li><a href="#pricing" className="hover:text-accent transition-colors">Financial</a></li>
+                <li><a href="#security" className="hover:text-accent transition-colors">Investors & CEOs</a></li>
+                <li><a href="#features" className="hover:text-accent transition-colors">Revenue operation</a></li>
+                <li><a href="#testimonials" className="hover:text-accent transition-colors">Sales & marketing</a></li>
+                <li><a href="#faq" className="hover:text-accent transition-colors">Human resources</a></li>
               </ul>
             </div>
           </div>
@@ -1071,7 +1275,7 @@ export default function App() {
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1, ease: "easeOut" }}
-              className="text-[15vw] font-bold text-white/[0.02] leading-none tracking-tighter select-none mb-8"
+              className="text-[15vw] font-bold text-white/[0.08] leading-none tracking-tighter select-none mb-8"
             >
               TouchPay
             </motion.h1>
