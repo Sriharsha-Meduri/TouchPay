@@ -389,7 +389,7 @@ export default function App() {
   const testimonials = [
     {
       quote:
-        "I've tried nearly every UPI app, but TouchPay is the first one that feels truly designed to streamline everyday payments. No more waiting for OTPs or scanning QR codes.",
+        "I've tried nearly every UPI app, but Quickpe is the first one that feels truly designed to streamline everyday payments. No more waiting for OTPs or scanning QR codes.",
       name: 'Rahul Sharma',
       role: 'Daily Commuter',
       avatar: 'https://picsum.photos/seed/mainuser/200/200',
@@ -417,7 +417,7 @@ export default function App() {
     },
     {
       quote:
-        'TouchPay made micro-payments on campus frictionless. Students now finish transactions faster than cash and with fewer disputes.',
+        'Quickpe made micro-payments on campus frictionless. Students now finish transactions faster than cash and with fewer disputes.',
       name: 'Arjun Mehta',
       role: 'Campus Admin',
       avatar: 'https://picsum.photos/seed/mainuser5/200/200',
@@ -426,12 +426,12 @@ export default function App() {
 
   const faqs = [
     { q: 'Does the merchant need an app?', a: 'No, the merchant needs no app, no device, and no QR code. They just tell you the amount verbally or write it down.' },
-    { q: "What if I don't have internet?", a: 'TouchPay works offline with strict limits up to ₹500 per transaction and a total of ₹2,000 pending. It automatically syncs when you are back online.' },
+    { q: "What if I don't have internet?", a: 'Quickpe works offline with strict limits up to ₹500 per transaction and a total of ₹2,000 pending. It automatically syncs when you are back online.' },
     { q: 'Is my fingerprint safe?', a: "Yes, your fingerprint never leaves your phone's secure hardware. The server only verifies a cryptographic signature, not the fingerprint itself." },
     { q: 'What if the fingerprint fails?', a: 'After 3 failed biometric attempts, the app will ask for your 4-digit PIN. After 3 failed PIN attempts, the account locks for your security.' },
     { q: 'Can I track pending offline payments?', a: 'Yes. The app clearly marks queued, synced, and failed transactions so you always know what still needs internet confirmation.' },
     { q: 'How are failed payments handled?', a: 'If sync fails due to low balance, duplicate request, or policy checks, the app marks it failed and lets you retry safely once resolved.' },
-    { q: 'Can I use TouchPay on multiple phones?', a: 'For security, your account is bound to your enrolled device and secure hardware. Device migration requires secure re-enrollment.' },
+    { q: 'Can I use Quickpe on multiple phones?', a: 'For security, your account is bound to your enrolled device and secure hardware. Device migration requires secure re-enrollment.' },
   ];
 
   useEffect(() => {
@@ -461,7 +461,7 @@ export default function App() {
             <motion.div whileHover={{ rotate: 180 }} transition={{ duration: 0.3 }}>
               <Fingerprint className="text-accent" />
             </motion.div>
-            TouchPay
+            Quickpe
           </a>
           
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
@@ -610,7 +610,7 @@ export default function App() {
               get <span className="font-serif italic text-accent">Payments Done</span>
             </motion.h2>
             <motion.p variants={fadeUp} className="text-gray-400 max-w-md">
-              Enhance your daily transactions with TouchPay, the ultimate payment platform that simplifies your financial life.
+              Enhance your daily transactions with Quickpe, the ultimate payment platform that simplifies your financial life.
             </motion.p>
           </motion.div>
           
@@ -661,7 +661,7 @@ export default function App() {
               <span className="font-serif italic text-accent">Payment Workflow</span>
             </motion.h2>
             <motion.p variants={fadeUp} className="text-gray-400 max-w-2xl mx-auto">
-              Elevate your financial management with TouchPay, the cutting-edge payment software created to streamline your life.
+              Elevate your financial management with Quickpe, the cutting-edge payment software created to streamline your life.
             </motion.p>
           </motion.div>
           
@@ -1136,10 +1136,10 @@ export default function App() {
           >
             <motion.div variants={fadeUp} className="text-accent text-sm font-medium mb-4 tracking-wider uppercase">About Us</motion.div>
             <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-medium text-white leading-tight mb-6">
-              Built by a focused <span className="font-serif italic text-accent">TouchPay Team</span>
+              Built by a focused <span className="font-serif italic text-accent">Quickpe Team</span>
             </motion.h2>
             <motion.p variants={fadeUp} className="text-gray-400 max-w-2xl mx-auto">
-              The people behind TouchPay who designed, built, and shipped this project.
+              The people behind Quickpe who designed, built, and shipped this project.
             </motion.p>
           </motion.div>
 
@@ -1277,10 +1277,10 @@ export default function App() {
               transition={{ duration: 1, ease: "easeOut" }}
               className="text-[15vw] font-bold text-white/[0.08] leading-none tracking-tighter select-none mb-8"
             >
-              TouchPay
+              Quickpe
             </motion.h1>
             <p className="text-gray-500 text-sm">
-              All rights reserved, {new Date().getFullYear()} powered by TouchPay
+              All rights reserved, {new Date().getFullYear()} powered by Quickpe
             </p>
           </div>
         </div>
