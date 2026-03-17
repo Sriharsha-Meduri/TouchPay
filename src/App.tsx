@@ -628,8 +628,8 @@ export default function App() {
             />
             <FeatureCard 
               icon={<Smartphone className="text-accent" />}
-              title="No Merchant App"
-              desc="Merchant needs no app, no device, no QR code. Just tells the amount verbally or writes it down."
+              title="Merchant & Consumer apps"
+              desc="Both merchant and consumers have their own apps which helps them setup their accounts, pin and limits of the transactions."
             />
             <FeatureCard 
               icon={<ShieldCheck className="text-accent" />}
