@@ -428,7 +428,7 @@ export default function App() {
     { q: 'Does the merchant need an app?', a: 'No, the merchant needs no app, no device, and no QR code. They just tell you the amount verbally or write it down.' },
     { q: "What if I don't have internet?", a: 'Quickpe works offline with strict limits up to ₹500 per transaction and a total of ₹2,000 pending. It automatically syncs when you are back online.' },
     { q: 'Is my fingerprint safe?', a: "Yes, your fingerprint never leaves your phone's secure hardware. The server only verifies a cryptographic signature, not the fingerprint itself." },
-    { q: 'What if the fingerprint fails?', a: 'After 3 failed biometric attempts, the app will ask for your 4-digit PIN. After 3 failed PIN attempts, the account locks for your security.' },
+    { q: 'What if the fingerprint fails?', a: 'After 3 failed biometric attempts, the app will ask for your 6-digit PIN. After 3 failed PIN attempts, the account locks for your security.' },
     { q: 'Can I track pending offline payments?', a: 'Yes. The app clearly marks queued, synced, and failed transactions so you always know what still needs internet confirmation.' },
     { q: 'How are failed payments handled?', a: 'If sync fails due to low balance, duplicate request, or policy checks, the app marks it failed and lets you retry safely once resolved.' },
     { q: 'Can I use Quickpe on multiple phones?', a: 'For security, your account is bound to your enrolled device and secure hardware. Device migration requires secure re-enrollment.' },
@@ -674,7 +674,7 @@ export default function App() {
           >
             <BentoCard 
               title="Enroll Once" 
-              desc="Name, fingerprint, and a 4-digit PIN is all you need."
+              desc="Name, fingerprint, and a 6-digit PIN is all you need."
               className="md:col-span-1"
             >
               <div className="h-32 w-full bg-white/5 rounded-xl mt-6 p-4 flex items-center justify-center relative overflow-hidden group-hover:bg-white/10 transition-colors">
@@ -820,7 +820,7 @@ export default function App() {
                 />
                 <AccordionItem 
                   title="PIN Fallback" 
-                  content="If biometric authentication fails 3 times, the app securely falls back to your 4-digit PIN. After 3 failed PINs, the account locks for your safety."
+                  content="If biometric authentication fails 3 times, the app securely falls back to your 6-digit PIN. After 3 failed PINs, the account locks for your safety."
                   isOpen={openAccordion === 2}
                   onClick={() => setOpenAccordion(2)}
                 />
